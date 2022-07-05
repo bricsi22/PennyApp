@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lIxo91vi3ylBwef77e4gPQ5obsoY9w0J+uHv8Jmsvw2IK3gYAbFqMuQhTLRMIbn0LkWKdztyEQJUcleAXuwPsw==",
+  "dgSpecHash": "Ef59OeoQfUPg1vtmQTRU4K/oazZGxcvBV7LNKrtRKv5+nByxY6RBnzAkDejbUoFarnkkjU3mM/dOeJTJFsZJBw==",
   "success": true,
-  "projectFilePath": "C:\\Training\\PennyApp\\API\\API.csproj",
+  "projectFilePath": "C:\\Training\\PennyApp\\api\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rbaldauf\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\rbaldauf\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
