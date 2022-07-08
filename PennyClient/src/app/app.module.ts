@@ -8,6 +8,8 @@ import { NavComponent } from './nav/nav.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SummarizationsComponent } from './summarizations/summarizations.component';
 import { TransactionsComponent } from './transactions/transactions.component';
+import { StoreModule } from '@ngrx/store';
+import * as fromAppReducer from './store/_reducers/app.reducer';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { TransactionsComponent } from './transactions/transactions.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    StoreModule.forRoot(fromAppReducer.appReducer),
   ],
   providers: [],
   bootstrap: [AppComponent]
