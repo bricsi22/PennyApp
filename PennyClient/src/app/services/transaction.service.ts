@@ -1,20 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Transaction } from '../shared/transaction.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransactionService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {  }
 
-  getAdminTables(): Observable<Transaction[]> {
+  getTransactions(): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(
-        //`${this.apiBaseUrl}${this.endpoint.base}${this.endpoint.tableAdmin}${this.endpoint.tableValues}`
-        ''
+        `${environment.apiUrl}Transactions`
     );
-}
-
+  }
 }

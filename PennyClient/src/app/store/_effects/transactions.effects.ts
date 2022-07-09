@@ -18,7 +18,7 @@ export class TransactionsEffects {
       .pipe(
           ofType<Action>(GET_TRANSACTION),
           mergeMap(() =>
-              this.transactionService.getAdminTables().pipe(
+              this.transactionService.getTransactions().pipe(
                   map(res => (new GetTransactionSuccess(res))),
                   catchError(err => {
                       return of(new GetTransactionFail(err.error));
