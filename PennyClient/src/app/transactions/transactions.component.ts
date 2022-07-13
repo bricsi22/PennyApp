@@ -13,8 +13,8 @@ import { ActionStatus } from '../enums/action-status.enums';
 })
 export class TransactionsComponent implements OnInit {
   transactions: Transaction[];
+  displayCreateTransactionRow: boolean = false;
   constructor(
-    private transactionService: TransactionService,
     private store: Store<AppState>) { }
 
   ngOnInit(): void {
@@ -28,5 +28,9 @@ export class TransactionsComponent implements OnInit {
 
   refreshGrid() : void {
     this.store.dispatch(new GetTransaction());
+  }
+
+  displayCreateTransactionFields() : void {
+    this.displayCreateTransactionRow = !this.displayCreateTransactionRow;
   }
 }

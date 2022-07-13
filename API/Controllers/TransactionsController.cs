@@ -1,10 +1,11 @@
-using System;
+
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using API.DTOs;
+using API.Interfaces;
 using API.Models;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
@@ -12,49 +13,57 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class TransactionsController : ControllerBase
     {
-        //private readonly ILogger<TransactionsController> _logger;
-        /*private TransactionsController(ILogger<TransactionsController> logger)
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
+
+        public TransactionsController(
+            IUnitOfWork unitOfWork,
+            IMapper mapper)
         {
-            _logger = logger;
-        }*/
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+        }
 
         [HttpGet]
-        public IEnumerable<Transaction> Get()
+        public async Task<IEnumerable<TransactionDto>> Get()
         {
-            var transactions = new List<Transaction>()
+            return await _unitOfWork.TransactionRepository.GetTransactions();
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<TransactionDto>> Add(TransactionDto transactionDto)
+        {
+            var transaction = _mapper.Map<Transaction>(transactionDto);
+            _unitOfWork.TransactionRepository.AddTransaction(transaction);
+            if (await _unitOfWork.Complete())
             {
-                new Transaction {
-                    Id = 1,
-                    Amount = 450,
-                    Date = new DateTime(2022, 07, 09, 12, 33, 45),
-                    Type = "Debit"
-                },
-                new Transaction {
-                    Id = 2,
-                    Amount = 666,
-                    Date = new DateTime(2022, 07, 09, 11, 13, 46),
-                    Type = "Debit"
-                },
-                new Transaction {
-                    Id = 3,
-                    Amount = 444,
-                    Date = new DateTime(2022, 07, 05, 8, 33, 32),
-                    Type = "Debit"
-                },
-                new Transaction {
-                    Id = 4,
-                    Amount = 345,
-                    Date = new DateTime(2022, 07, 04, 6, 33, 41),
-                    Type = "Credit"
-                },
-                new Transaction {
-                    Id = 5,
-                    Amount = 222,
-                    Date = new DateTime(2022, 07, 09, 12, 33, 45),
-                    Type = "Credit"
-                },
-            };
-            return transactions;
+                return Ok(_mapper.Map<TransactionDto>(transaction));
+            }
+            return BadRequest("Failed to add transaction");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<TransactionDto>> Update(TransactionDto transactionDto)
+        {
+            var transaction = _mapper.Map<Transaction>(transactionDto);
+            _unitOfWork.TransactionRepository.UpdateTransaction(transaction);
+            if (await _unitOfWork.Complete())
+            {
+                return Ok(_mapper.Map<TransactionDto>(transaction));
+            }
+            return BadRequest("Failed to update transaction");
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult<bool>> Delete(TransactionDto transactionDto)
+        {
+            var transaction = _mapper.Map<Transaction>(transactionDto);
+            _unitOfWork.TransactionRepository.DeleteTransaction(transaction);
+            if (await _unitOfWork.Complete())
+            {
+                return Ok();
+            }
+            return BadRequest("Failed to delete transaction");
         }
     }
 }

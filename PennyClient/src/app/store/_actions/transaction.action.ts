@@ -1,22 +1,24 @@
 import { Action } from "@ngrx/store";
 import { Transaction } from "../../shared/transaction.model";
 
-export const ADD_TRANSACTION = '[TRANSACTION] ADD_TRANSACTION';
-export class AddTransaction implements Action {
-    readonly type = ADD_TRANSACTION;
-    payload: Transaction;
+export const SAVE_TRANSACTION = '[TRANSACTION] SAVE_TRANSACTION';
+export class SaveTransaction implements Action {
+    readonly type = SAVE_TRANSACTION;
+    constructor(public transaction: Transaction) {
+
+    }
 }
 
-export const ADD_TRANSACTION_SUCCESS = '[TRANSACTION] ADD_TRANSACTION_SUCCESS';
-export class AddTransactionSuccess implements Action {
-    readonly type = ADD_TRANSACTION_SUCCESS;
-    payload: Transaction;
+export const SAVE_TRANSACTION_SUCCESS = '[TRANSACTION] SAVE_TRANSACTION_SUCCESS';
+export class SaveTransactionSuccess implements Action {
+    readonly type = SAVE_TRANSACTION_SUCCESS;
+    constructor(public transaction: Transaction) { }
 }
 
-export const ADD_TRANSACTION_FAIL = '[TRANSACTION] ADD_TRANSACTION_FAIL';
-export class AddTransactionFail implements Action {
-    readonly type = ADD_TRANSACTION_FAIL;
-    payload: any;
+export const SAVE_TRANSACTION_FAIL = '[TRANSACTION] SAVE_TRANSACTION_FAIL';
+export class SaveTransactionFail implements Action {
+    readonly type = SAVE_TRANSACTION_FAIL;
+    constructor(public error: any) { }
 }
 
 export const REMOVE_TRANSACTION = '[TRANSACTION] REMOVE_TRANSACTION';
@@ -71,7 +73,7 @@ export class GetTransactionFail implements Action {
     constructor(public payload: any) {}
 }
 
-export type TransactionActions = AddTransaction | AddTransactionSuccess | AddTransactionFail | 
+export type TransactionActions = SaveTransaction | SaveTransactionSuccess | SaveTransactionFail | 
                                  RemoveTransaction | RemoveTransactionSuccess | RemoveTransactionFail |
                                  UpdateTransaction | UpdateTransactionSuccess | UpdateTransactionFail |
                                  GetTransaction | GetTransactionSuccess | GetTransactionFail

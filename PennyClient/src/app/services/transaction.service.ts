@@ -16,4 +16,10 @@ export class TransactionService {
         `${environment.apiUrl}Transactions`
     );
   }
+
+  addTransactions(transaction: Transaction): Observable<Transaction> {
+    return this.http.put<Transaction>(
+        `${environment.apiUrl}Transactions`, transaction
+    );
+  }
 }

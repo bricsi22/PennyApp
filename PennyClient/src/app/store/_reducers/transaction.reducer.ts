@@ -12,14 +12,14 @@ const initialState: State = {
     status: ActionStatus.NotStarted
 };
 
-export function transactionReducer(state = initialState, action: fromTransactionActions.TransactionActions)
+export function transactionReducer(state = initialState, action: fromTransactionActions.TransactionActions): State
 {
     switch(action.type)
     {
         case fromTransactionActions.GET_TRANSACTION:
             return {
                 transactions: null,
-                status: ActionStatus.InProgress
+                status: ActionStatus.GetInProgress
             };
         case fromTransactionActions.GET_TRANSACTION_SUCCESS:
             return {
@@ -32,6 +32,24 @@ export function transactionReducer(state = initialState, action: fromTransaction
                 ...state,
                 status: ActionStatus.Fail
             }
+        case fromTransactionActions.SAVE_TRANSACTION:
+            return {
+                ...state,
+                transactions: [...state.transactions, action.transaction],
+                status: ActionStatus.SavingInProgress
+            }
+        case fromTransactionActions.SAVE_TRANSACTION_SUCCESS:
+            return {
+                ...state,
+                transactions: [...state.transactions],
+                status: ActionStatus.Success
+            }
+            case fromTransactionActions.SAVE_TRANSACTION_FAIL:
+                return {
+                    ...state,
+                    transactions: [...state.transactions],
+                    status: ActionStatus.Fail
+                }
         default:
             return initialState;
     }

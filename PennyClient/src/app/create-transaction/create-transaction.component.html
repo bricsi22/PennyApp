@@ -1,0 +1,24 @@
+<div class="row">
+    <form #transactionForm="ngForm" (ngSubmit)="createTransaction()" id="transactionForm">
+        <h4>Create Transaction</h4>
+        <div class="row">
+            <div class="col-5 v-center">
+                <div class="btn-group">
+                    <label class="btn btn-primary" [(ngModel)]="checkModel.credit" [ngModelOptions]="{standalone: true}"
+                           btnCheckbox tabindex="0" role="button">Credit</label>
+                    <label class="btn btn-primary" [(ngModel)]="checkModel.debit" [ngModelOptions]="{standalone: true}"
+                           btnCheckbox tabindex="0" role="button">Debit</label>
+                </div>
+            </div>
+            <div class="col-5 v-center">
+                <input name="amount" type="number" placeholder="Transaction amount" />
+            </div>
+            <div class="col-2 v-center">
+                <button type="button" class="btn btn-success" (click)="createTransaction()">
+                    Create
+                  </button>
+            </div>
+        </div>
+
+    </form>
+</div>
