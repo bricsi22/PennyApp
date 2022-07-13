@@ -11,14 +11,13 @@
                 </div>
             </div>
             <div class="col-5 v-center">
-                <input name="amount" type="number" placeholder="Transaction amount" />
+                <input class="form-control" name="amount" type="number" placeholder="Transaction amount" [(ngModel)]="transaction.amount" required/>
             </div>
             <div class="col-2 v-center">
                 <button type="button" class="btn btn-success" (click)="createTransaction()">
                     Create
-                  </button>
+                </button>
             </div>
         </div>
-
     </form>
 </div>

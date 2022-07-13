@@ -22,4 +22,14 @@ export class TransactionService {
         `${environment.apiUrl}Transactions`, transaction
     );
   }
+
+  removeTransaction(transactionId: number): Observable<boolean> {
+    return this.http.delete<boolean>(`${environment.apiUrl}Transactions?id=${transactionId}`);
+  }
+  
+  updateTransactions(transaction: Transaction): Observable<Transaction> {
+    return this.http.post<Transaction>(
+        `${environment.apiUrl}Transactions`, transaction
+    );
+  }
 }

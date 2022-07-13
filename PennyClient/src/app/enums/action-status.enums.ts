@@ -1,7 +1,6 @@
 export enum ActionStatus {
     NotStarted,
-    GetInProgress,
-    SavingInProgress,
+    InProgress,
     Success,
     Fail,
 }

@@ -23,6 +23,8 @@ import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-mat
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { NgxCurrencyModule } from "ngx-currency";
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { UpdateTransactionModalComponent } from './update-transaction-modal/update-transaction-modal.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { NgxCurrencyModule } from "ngx-currency";
     NavComponent,
     SummarizationsComponent,
     TransactionsComponent,
-    CreateTransactionComponent
+    CreateTransactionComponent,
+    UpdateTransactionModalComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +53,7 @@ import { NgxCurrencyModule } from "ngx-currency";
     BsDropdownModule.forRoot(),
     DatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
+    ModalModule.forRoot(),
     NgxMatDatetimePickerModule,
     NgxCurrencyModule
   ],

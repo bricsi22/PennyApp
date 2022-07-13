@@ -10,6 +10,6 @@ namespace API.Interfaces
         Task<IEnumerable<TransactionDto>> GetTransactions();
         void AddTransaction(Transaction transaction);
         TransactionDto UpdateTransaction(Transaction transaction);
-        void DeleteTransaction(Transaction transaction);
+        Task DeleteTransaction(long transactionId);
     }
 }

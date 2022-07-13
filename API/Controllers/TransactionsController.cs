@@ -55,10 +55,9 @@ namespace API.Controllers
         }
 
         [HttpDelete]
-        public async Task<ActionResult<bool>> Delete(TransactionDto transactionDto)
+        public async Task<ActionResult<bool>> Delete([FromQuery]long id)
         {
-            var transaction = _mapper.Map<Transaction>(transactionDto);
-            _unitOfWork.TransactionRepository.DeleteTransaction(transaction);
+            await _unitOfWork.TransactionRepository.DeleteTransaction(id);
             if (await _unitOfWork.Complete())
             {
                 return Ok();

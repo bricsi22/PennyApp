@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { ActionStatus } from '../enums/action-status.enums';
 import { Transaction } from '../shared/transaction.model';
-import { SaveTransaction } from '../store/_actions/transaction.action';
+import { SaveTransaction, SAVE_TRANSACTION_SUCCESS } from '../store/_actions/transaction.action';
 import { AppState } from '../store/_reducers/app.reducer';
 
 @Component({
@@ -11,18 +12,28 @@ import { AppState } from '../store/_reducers/app.reducer';
 })
 export class CreateTransactionComponent implements OnInit {
   checkModel: { credit?: boolean; debit?: boolean;} = { credit: false, debit: true };
+  transaction: Transaction = {
+    id: 0,
+    type: 'Debit',
+    amount: 0
+  };
   constructor(
     private store: Store<AppState>) 
   {
   }
 
   ngOnInit(): void {
+    this.store.select('transactions').subscribe((state) => {
+      if (state.status === ActionStatus.Success && state.action === SAVE_TRANSACTION_SUCCESS) 
+      {
+        
+      }
+    })
   }
 
   createTransaction(): void {
-    debugger;
     var transaction = {
-      amount: 123,
+      amount: this.transaction.amount,
       type: this.checkModel.credit ? 'Credit' : 'Debit',
       date: new Date()
     } as Transaction;

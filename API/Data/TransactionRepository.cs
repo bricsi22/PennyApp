@@ -40,8 +40,9 @@ namespace API.Data
             return _mapper.Map<TransactionDto>(updatedTransaction.Entity);
         }
 
-        public void DeleteTransaction(Transaction transaction)
+        public async Task DeleteTransaction(long transactionId)
         {
+            var transaction = await _dataContext.Transactions.FindAsync(transactionId);
             _dataContext.Transactions.Remove(transaction);
         }
     }
